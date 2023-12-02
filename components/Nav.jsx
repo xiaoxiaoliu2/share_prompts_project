@@ -8,7 +8,7 @@ const Nav = () => {
   const { data: session } = useSession();
   const [providers, setProviders] = useState(null); // allow us to sign in using Google and next-auth
   const [toggleDropdown, setToggleDropdown] = useState(false);  // make the button open a menu， use a useState
-
+  const isUserLoggedIn = true;
   useEffect(() => {
     const setUpProviders = async () => {
       const response = await getProviders();
@@ -31,7 +31,8 @@ const Nav = () => {
 
       {/* {Desktop Navigation} */}
       <div className='sm:flex hidden'>
-        {session?.user ? (
+        {/* {session?.user ? ( */}
+        {isUserLoggedIn ? (
           <div className='flex gap-3 md:gap-5'>
             <Link href="/create-prompt" className='black_btn'>
               Create Post
@@ -41,7 +42,8 @@ const Nav = () => {
             </button>
             <Link href="">
               <Image
-                src={session?.user.image}
+                // src={session?.user.image}
+                src="/assets/images/logo.svg"
                 width={37}
                 height={37}
                 className='rounded-full'
@@ -49,7 +51,7 @@ const Nav = () => {
               />
             </Link>
           </div>
-        ) : (
+          ) : (
           <>
             {providers &&
               Object.values(providers).map((provider) => (
@@ -63,17 +65,20 @@ const Nav = () => {
                 </button>
               ))}
           </>
-        )}
+        )
+        }
 
       </div>
 
       {/* {Mobile Navigation} */}
       <div className='sm:hidden flex relative'>
-        {session?.user ? (
+        {/* {session?.user ? (  */}
+        {isUserLoggedIn ? (
           <div className='flex'>
             <Link href="">
               <Image
-                src={session?.user.image}
+                // src={session?.user.image}
+                src="/assets/images/logo.svg"
                 width={37}
                 height={37}
                 className='rounded-full'
@@ -111,7 +116,7 @@ const Nav = () => {
               </div>
             )}
           </div>
-        ) : (
+          ) : (
           <>
             {providers &&
               Object.values(providers).map((provider) => (
@@ -126,6 +131,7 @@ const Nav = () => {
               ))}
           </>
         )}
+
 
       </div>
 
